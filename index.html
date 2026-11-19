@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore a configurable mockup for evidence-ready livestock country reporting using data surfaced through the FAO Livestock Hub.">
+  <meta name="color-scheme" content="light">
+  <title>Livestock Country Report Builder</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script>
+  <script defer src="chart.js"></script>
+  <script defer src="word-report.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#main-content" aria-label="Livestock Hub country report builder home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">Livestock Hub</span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-context">Country evidence profile</span>
+      </a>
+      <div class="header-actions">
+        <span class="prototype-badge">Concept mockup</span>
+        <a class="quiet-link" href="https://livestock.fao.org/" target="_blank" rel="noopener noreferrer">Open Livestock Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">CONFIGURABLE COUNTRY EVIDENCE</p>
+        <h1 id="page-title">Build a livestock country profile</h1>
+        <p class="hero-copy">Define the purpose, select evidence at indicator level and review coverage before turning Livestock Hub data into an editable analytical report.</p>
+      </div>
+      <aside class="hero-note mockup-note" aria-label="Mockup status">
+        <span class="note-kicker">Exploratory mockup</span>
+        <strong>A working concept, open to refinement</strong>
+        <span>This demonstrates how Livestock Hub data could support semi-automated country reporting. It is not an official FAO product or publication.</span>
+      </aside>
+    </section>
+
+    <nav class="stepper stepper-five" aria-label="Report building steps">
+      <button class="step-tab is-active" type="button" data-step="context" aria-current="step">
+        <span class="step-number">1</span><span><strong>Purpose &amp; scope</strong><small>Use case, country, period</small></span>
+      </button>
+      <span class="step-line" aria-hidden="true"></span>
+      <button class="step-tab" type="button" data-step="modules">
+        <span class="step-number">2</span><span><strong>Evidence</strong><small>Modules &amp; indicators</small></span>
+      </button>
+      <span class="step-line" aria-hidden="true"></span>
+      <button class="step-tab" type="button" data-step="review">
+        <span class="step-number">3</span><span><strong>Data review</strong><small>Coverage &amp; limitations</small></span>
+      </button>
+      <span class="step-line" aria-hidden="true"></span>
+      <button class="step-tab" type="button" data-step="analysis">
+        <span class="step-number">4</span><span><strong>Analysis</strong><small>Signals, gaps &amp; questions</small></span>
+      </button>
+      <span class="step-line" aria-hidden="true"></span>
+      <button class="step-tab" type="button" data-step="report">
+        <span class="step-number">5</span><span><strong>Report</strong><small>Sections &amp; exports</small></span>
+      </button>
+    </nav>
+
+    <form id="report-form" class="workspace" novalidate>
+      <aside class="blueprint" aria-labelledby="blueprint-title">
+        <div class="blueprint-heading">
+          <div><p class="eyebrow eyebrow-light">REPORT BLUEPRINT</p><h2 id="blueprint-title">Your selection</h2></div>
+          <button class="reset-button" type="button" id="reset-settings">Reset</button>
+        </div>
+        <dl class="blueprint-list">
+          <div><dt>Purpose</dt><dd id="blueprint-purpose">Country overview</dd></div>
+          <div><dt>Country</dt><dd id="blueprint-country">Not selected</dd></div>
+          <div><dt>Peer countries</dt><dd id="blueprint-comparison">None</dd></div>
+          <div><dt>Period</dt><dd id="blueprint-period">—</dd></div>
+          <div><dt>Species focus</dt><dd id="blueprint-species">All livestock</dd></div>
+          <div><dt>Report depth</dt><dd id="blueprint-depth">Standard profile</dd></div>
+          <div><dt>Evidence</dt><dd id="blueprint-modules">Not selected</dd></div>
+        </dl>
+        <div class="blueprint-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <p><strong id="blueprint-coverage">Waiting for a selection</strong><span>Coverage is checked before analysis.</span></p>
+        </div>
+        <div class="configuration-actions" aria-label="Report configuration actions">
+          <button type="button" id="save-configuration">Save configuration</button>
+          <button type="button" id="load-configuration">Load last saved</button>
+        </div>
+        <p class="blueprint-footnote">The evidence review exposes source, unit, period, evidence type, recency and known limitations for each selected indicator.</p>
+      </aside>
+
+      <div class="step-workspace">
+        <section class="step-panel is-active" id="step-context" data-panel="context" aria-labelledby="context-title">
+          <div class="panel-heading"><div>
+            <p class="step-label">STEP 1 OF 5</p><h2 id="context-title">Define the purpose and scope</h2>
+            <p>Set the intended use first so the tool can organize the evidence and narrative appropriately.</p>
+          </div></div>
+
+          <div class="scope-block" aria-labelledby="use-case-heading">
+            <div class="subsection-heading"><span>01</span><div><h3 id="use-case-heading">Reporting use case</h3><p>These choices shape emphasis and report structure; they do not alter source data.</p></div></div>
+            <div class="form-grid form-grid-three">
+              <label class="field" for="report-purpose">
+                <span class="field-label">Report purpose</span>
+                <select id="report-purpose" name="report-purpose">
+                  <option value="overview">Country overview</option>
+                  <option value="briefing">Management briefing</option>
+                  <option value="policy-dialogue">Policy dialogue</option>
+                  <option value="programme-design">Programme design</option>
+                  <option value="investment-scoping">Investment scoping</option>
+                  <option value="risk-monitoring">Risk monitoring</option>
+                </select>
+                <small>Sets the framing and suggested follow-up questions.</small>
+              </label>
+              <label class="field" for="report-depth">
+                <span class="field-label">Report depth</span>
+                <select id="report-depth" name="report-depth">
+                  <option value="snapshot">Executive snapshot</option>
+                  <option value="standard" selected>Standard profile</option>
+                  <option value="full">Full evidence pack</option>
+                </select>
+                <small>Controls narrative detail, tables and methodology annexes.</small>
+              </label>
+              <label class="field" for="analytical-emphasis">
+                <span class="field-label">Analytical emphasis</span>
+                <select id="analytical-emphasis" name="analytical-emphasis">
+                  <option value="balanced">Balanced overview</option>
+                  <option value="production">Production &amp; productivity</option>
+                  <option value="one-health">One Health</option>
+                  <option value="climate">Climate &amp; environment</option>
+                </select>
+                <small>Prioritizes sections without hiding other selected evidence.</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="scope-block" aria-labelledby="geography-heading">
+            <div class="subsection-heading"><span>02</span><div><h3 id="geography-heading">Country and peer context</h3><p>Compare the primary country with up to two peers using shared indicators and years.</p></div></div>
+            <div class="form-grid form-grid-three">
+              <label class="field" for="country">
+                <span class="field-label">Primary country <em>Required</em></span>
+                <select id="country" name="country" required><option value="">Select a country</option></select>
+                <small>Used as the main country throughout the profile.</small>
+              </label>
+              <label class="field" for="comparison">
+                <span class="field-label">Peer country 1 <span>Optional</span></span>
+                <select id="comparison" name="comparison"><option value="">No comparison</option></select>
+                <small>Add a country for a like-for-like comparison.</small>
+              </label>
+              <label class="field" for="comparison-2">
+                <span class="field-label">Peer country 2 <span>Optional</span></span>
+                <select id="comparison-2" name="comparison-2"><option value="">No second peer</option></select>
+                <small>Supports a small peer basket and common-year comparison.</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="scope-block" aria-labelledby="time-heading">
+            <div class="subsection-heading"><span>03</span><div><h3 id="time-heading">Species and reporting period</h3><p>Choose a broad profile or focus the available indicators on one livestock group.</p></div></div>
+            <div class="form-grid">
+              <label class="field" for="species">
+                <span class="field-label">Species focus</span>
+                <select id="species" name="species"><option value="all">All available livestock</option></select>
+                <small>Filters suggested indicators; individual evidence remains selectable.</small>
+              </label>
+              <fieldset class="field period-field compact-period">
+                <legend class="field-label">Reporting period</legend>
+                <div class="period-selects">
+                  <label for="start-year"><span>From</span><select id="start-year" name="start-year" required></select></label><span class="period-arrow" aria-hidden="true">→</span>
+                  <label for="end-year"><span>To</span><select id="end-year" name="end-year" required></select></label>
+                </div>
+                <small>Trend comparisons use the first and last available observations.</small>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <p class="form-status" id="settings-status" aria-live="polite"></p>
+            <button class="button primary" type="button" id="next-context">Choose evidence</button>
+          </div>
+        </section>
+
+        <section class="step-panel" id="step-modules" data-panel="modules" aria-labelledby="modules-title" hidden>
+          <div class="panel-heading"><div>
+            <p class="step-label">STEP 2 OF 5</p><h2 id="modules-title">Select modules and indicators</h2>
+            <p>Build a focused briefing or expand each module into a fuller technical evidence pack.</p>
+          </div><span class="selection-count" id="module-count">0 selected</span></div>
+          <div id="module-options" class="module-grid module-grid-detailed" role="group" aria-label="Available report modules and indicators"></div>
+          <div class="module-note"><span class="info-icon" aria-hidden="true">i</span><p><strong>Historical evidence and scenarios remain separate.</strong> Observed, reported, estimated and modelled series stay labelled. Intervention scenarios are handed off to specialist tools rather than presented as observations.</p></div>
+          <div class="panel-footer panel-footer-split">
+            <button class="button secondary" type="button" data-back="context">Back</button>
+            <button class="button primary" type="button" id="next-modules">Review selected evidence</button>
+          </div>
+        </section>
+
+        <section class="step-panel" id="step-review" data-panel="review" aria-labelledby="review-title" hidden>
+          <div class="panel-heading review-heading"><div>
+            <p class="step-label">STEP 3 OF 5</p><h2 id="review-title">Review the evidence manifest</h2>
+            <p>Confirm coverage, recency, comparability and interpretation limits before analysis.</p>
+          </div><div class="coverage-key" aria-label="Coverage status key"><span><i class="key-dot good"></i>Ready</span><span><i class="key-dot partial"></i>Partial</span><span><i class="key-dot unavailable"></i>No records</span><span><i class="key-dot error"></i>Retrieval error</span></div></div>
+          <div class="review-summary" id="review-summary" aria-live="polite"></div>
+          <div id="data-review" class="data-review table-scroll" aria-label="Selected indicator evidence manifest"></div>
+          <div class="review-disclosure">
+            <h3>Evidence labels remain visible in every output</h3>
+            <div><p><strong>Official / reported</strong><span>Country submissions or reported event records.</span></p><p><strong>Estimated</strong><span>Values estimated or imputed within the source dataset.</span></p><p><strong>Modelled</strong><span>Spatial or emissions estimates; not direct observations.</span></p></div>
+          </div>
+          <div class="panel-footer panel-footer-split">
+            <button class="button secondary" type="button" data-back="modules">Back</button>
+            <button class="button primary" type="button" id="build-analysis">Build analysis preview</button>
+          </div>
+        </section>
+
+        <section class="step-panel analysis-panel" id="step-analysis" data-panel="analysis" aria-labelledby="analysis-title" hidden>
+          <div class="panel-heading"><div>
+            <p class="step-label">STEP 4 OF 5</p><h2 id="analysis-title" tabindex="-1">Review the country analysis</h2>
+            <p>Inspect evidence signals and data gaps before generating the full narrative and exports.</p>
+          </div><span class="analysis-status">Evidence-based preview</span></div>
+
+          <section class="analysis-block" aria-labelledby="dashboard-title">
+            <div class="analysis-heading"><div><p class="section-kicker">COUNTRY DASHBOARD</p><h3 id="dashboard-title">Latest values and period change</h3></div><span>Same reviewed data bundle</span></div>
+            <div id="analysis-dashboard" class="kpi-grid" aria-live="polite"></div>
+          </section>
+
+          <div class="analysis-columns">
+            <section class="analysis-block" aria-labelledby="signals-title">
+              <div class="analysis-heading"><div><p class="section-kicker">KEY EVIDENCE SIGNALS</p><h3 id="signals-title">What the data indicate</h3></div></div>
+              <div id="analysis-signals" class="analysis-list"></div>
+            </section>
+            <section class="analysis-block" aria-labelledby="gaps-title">
+              <div class="analysis-heading"><div><p class="section-kicker">DATA VALIDATION</p><h3 id="gaps-title">Gaps and cautions</h3></div></div>
+              <div id="analysis-gaps" class="analysis-list analysis-list-caution"></div>
+            </section>
+          </div>
+
+          <section class="analysis-block dialogue-block" aria-labelledby="dialogue-title">
+            <div class="analysis-heading"><div><p class="section-kicker">COUNTRY DIALOGUE</p><h3 id="dialogue-title">Questions and suggested next analyses</h3></div><span>Not automatic policy recommendations</span></div>
+            <div id="analysis-dialogue" class="dialogue-grid"></div>
+          </section>
+
+          <div class="mockup-disclaimer compact-disclaimer"><strong>Mockup boundary</strong><span>The analysis organizes available evidence and proposes questions for discussion. It does not replace country validation, technical review or policy judgement.</span></div>
+          <div class="panel-footer panel-footer-split">
+            <button class="button secondary" type="button" data-back="review">Back to evidence review</button>
+            <button class="button primary" type="button" id="generate-report">Generate full report</button>
+          </div>
+        </section>
+
+        <section class="step-panel report-panel" id="step-report" data-panel="report" aria-labelledby="report-title" hidden>
+          <div class="report-masthead">
+            <div><p class="eyebrow">LIVESTOCK COUNTRY EVIDENCE PROFILE</p><h2 id="report-title" tabindex="-1">Report preview</h2><p class="report-meta" id="report-meta"></p></div>
+            <div class="exports">
+              <label class="export-template" for="export-template"><span>Export structure</span><select id="export-template" name="export-template"><option value="brief">Executive brief</option><option value="technical" selected>Technical report</option><option value="annex">Evidence annex</option></select></label>
+              <button class="button secondary" id="export-csv" type="button" disabled>Download data</button>
+              <button class="button secondary" id="export-json" type="button" disabled>Download configuration</button>
+              <button class="button secondary" id="print-report" type="button" disabled>Print / PDF</button>
+              <button class="button primary" id="export-word" type="button" disabled>Download Word</button>
+            </div>
+          </div>
+          <div class="report-tools"><button class="edit-report" type="button" data-back="analysis">Back to analysis</button><span id="report-coverage-note">Generated from the reviewed evidence snapshot</span></div>
+          <div class="mockup-disclaimer report-disclaimer"><strong>Concept mockup</strong><span>This exploratory output is not an official FAO publication. Content, indicators, visual design and export structure can be further adjusted after technical and country review.</span></div>
+          <div class="summary" id="summary" hidden></div>
+          <nav id="report-navigation" class="report-navigation" aria-label="Report section navigation"></nav>
+          <div id="charts" class="charts" aria-label="Report sections and indicator charts"></div>
+          <section id="map-results" class="map-results" aria-labelledby="map-heading" hidden></section>
+          <details class="sources" id="sources" open><summary>Evidence manifest, methods and limitations</summary><div id="sources-content"></div></details>
+          <p id="export-status" class="visually-hidden" aria-live="polite"></p>
+        </section>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-inner"><p><strong>Livestock Country Report Builder · Concept mockup</strong><span>Exploring configurable, semi-automated country reporting with Livestock Hub evidence.</span></p><p>Not an official FAO product or publication. All data remain subject to source definitions and limitations.</p></div></footer>
+</body>
+</html>
